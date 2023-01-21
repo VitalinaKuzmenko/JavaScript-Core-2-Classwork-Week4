@@ -47,9 +47,16 @@ Create a function called "showMovies" that
 */
 
 function showMovies() {
-  // add code here
+  console.log("inside showMovies()");
+  console.log(movies);
+  for (let movie of movies) {
+    let pElementMovie = document.createElement("p");
+    pElementMovie.innerHTML = `${movie.title} - ${movie.director}`;
+    document.getElementById("allMovies").appendChild(pElementMovie);
+  }
+  let moviesNumber = document.getElementById("moviesNumber");
+  moviesNumber.innerHTML = movies.length;
 }
-
 
 /*
 
@@ -63,12 +70,21 @@ How many movies can you see on your page?
 */
 
 const myFavMovie = {
-  // add code here
-}
+  title: "Hello",
+  director: "Aguilera",
+  type: "horror and fun",
+  haveWatched: true,
+};
 
 function addMovie(movie, callback) {
-  // add code here
+  setTimeout(() => {
+    movies.push(movie);
+    callback();
+  }, 2000);
 }
+
+showMovies();
+addMovie(myFavMovie, showMovies);
 
 /*
 
@@ -77,8 +93,6 @@ Can you change the addMovie function to make sure the new movie you just added i
 Hint: use callbacks
 
 */
-
-
 
 /*
 
@@ -92,3 +106,20 @@ Task 4 - **Extra**
 Hint: Use the functions you created on tasks 1-3
 
 */
+function reading(event) {
+  event.preventDefault();
+  let title_ = document.getElementById("title").value;
+  let director_ = document.getElementById("director").value;
+  let type_ = document.getElementById("type").value;
+  let watched_ = document.getElementById("haveWatched").value;
+  console.log(title_ + director_ + type_ + watched_);
+  const newMovie = {};
+  newMovie.title = title_;
+  newMovie.director = director_;
+  newMovie.type = type_;
+  newMovie.haveWatched = watched_;
+  addMovie(newMovie, showMovies);
+}
+
+let submitForm = document.getElementById("addMovies");
+submitForm.addEventListener("submit", reading);
