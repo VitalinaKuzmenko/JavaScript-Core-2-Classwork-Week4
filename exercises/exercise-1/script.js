@@ -21,3 +21,20 @@ const greekGods = [
   "Poseidon",
   "Zeus",
 ];
+
+console.log("synchronous");
+
+for (var i = 0; i < greekGods.length; i++) {
+  console.log(i + ". " + greekGods[i]);
+}
+
+console.log("asynchronous");
+
+for (var k = 0; k < greekGods.length; k++) {
+  console.log("k is: " + k);
+  if (k === 1) {
+    setTimeout(() => console.log(k + ". " + greekGods[k]), 2000);
+  } else {
+    console.log(k + ". " + greekGods[k]);
+  }
+}
